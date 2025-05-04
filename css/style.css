@@ -1,0 +1,488 @@
+/* Define CSS variables for colors, fonts, and other reusable values */
+:root {
+  --primary-color: #e2d1f9; /* Light purple */
+  --secondary-color: #d0bdf4; /* Slightly darker purple */
+  --accent-color: #a280e8; /* Accent purple */
+  --text-color: #4a4453; /* Dark gray for text */
+  --light-text: #f8f7fa; /* Light text color */
+  --font-heading: "Playfair Display", serif; /* Font for headings */
+  --font-body: "Montserrat", sans-serif; /* Font for body text */
+}
+
+/* Reset default margin, padding, and box-sizing for all elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base styles for the body */
+body {
+  font-family: var(--font-body); /* Use body font */
+  color: var(--text-color); /* Text color */
+  background-color: #fefcff; /* Light background */
+  line-height: 1.6; /* Line height for readability */
+}
+
+/* Center content and add padding for the main container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header section with gradient background and centered text */
+.header {
+  text-align: center;
+  padding: 40px 0;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  color: var(--text-color);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add a subtle background pattern to the header */
+.header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("images/background-pattern.png") center/cover;
+  opacity: 0.05; /* Low opacity for subtle effect */
+  z-index: 0;
+}
+
+/* Title styles in the header */
+.title {
+  font-family: var(--font-heading); /* Use heading font */
+  font-size: 3.5rem; /* Large font size */
+  font-weight: 600; /* Bold */
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1; /* Ensure it appears above the background */
+  animation: fadeIn 1.5s ease-out; /* Fade-in animation */
+}
+
+/* Subtitle styles in the header */
+.subtitle {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 400; /* Regular weight */
+  margin-bottom: 5px;
+  position: relative;
+  z-index: 1;
+  animation: fadeIn 1.5s ease-out 0.3s both; /* Delayed fade-in animation */
+}
+
+/* Date text in the header */
+.date {
+  font-size: 1.2rem;
+  position: relative;
+  z-index: 1;
+  animation: fadeIn 1.5s ease-out 0.6s both; /* Further delayed fade-in */
+}
+
+/* Countdown section with a semi-transparent background */
+.countdown-section {
+  padding: 40px 0;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
+}
+
+/* Center the countdown container */
+.countdown-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Title for the countdown section */
+.countdown-title {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  color: var(--text-color);
+}
+
+/* Countdown items displayed in a row */
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Space between items */
+}
+
+/* Individual countdown item styles */
+.countdown-item {
+  background-color: var(--primary-color);
+  padding: 15px 25px;
+  border-radius: 8px; /* Rounded corners */
+  min-width: 90px;
+  box-shadow: 0 4px 15px rgba(162, 128, 232, 0.2); /* Subtle shadow */
+  transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for countdown items */
+.countdown-item:hover {
+  transform: translateY(-5px); /* Slight upward movement */
+}
+
+/* Number in the countdown item */
+.countdown-item span {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 600;
+  display: block;
+  color: var(--accent-color); /* Accent color */
+}
+
+/* Label below the number in countdown items */
+.countdown-label {
+  font-size: 0.9rem;
+  text-transform: uppercase; /* Uppercase text */
+  letter-spacing: 1px; /* Spacing between letters */
+  margin-top: 5px;
+}
+
+/* Divider with floral image */
+.floral-divider {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.floral-divider img {
+  max-width: 200px;
+  opacity: 0.7; /* Slightly transparent */
+}
+
+/* Gallery section with semi-transparent background */
+.gallery-section {
+  padding: 40px 0;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* Center the gallery container */
+.gallery-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Title for the gallery section */
+.gallery-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--text-color);
+}
+
+/* Gallery container with rounded corners and shadow */
+.gallery {
+  position: relative;
+  margin: 0 auto;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Current image in the gallery */
+#current-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover; /* Ensure image covers the area */
+  display: block;
+  transition: opacity 0.5s ease; /* Smooth fade effect */
+}
+
+/* Navigation buttons for the gallery */
+.gallery-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: white;
+}
+
+/* Gallery navigation buttons */
+.gallery-nav button {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--accent-color);
+  padding: 0 15px;
+  transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for gallery navigation buttons */
+.gallery-nav button:hover {
+  transform: scale(1.2); /* Slightly enlarge */
+}
+
+/* Counter for the gallery */
+#image-counter {
+  font-family: var(--font-heading);
+}
+
+/* Schedule section with semi-transparent background */
+.schedule-section {
+  padding: 40px 0;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* Title for sections */
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--text-color);
+}
+
+/* Center the schedule container */
+.schedule-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Individual schedule card styles */
+.schedule-card {
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for schedule cards */
+.schedule-card:hover {
+  transform: translateY(-5px); /* Slight upward movement */
+}
+
+/* Header of the schedule card */
+.card-header {
+  background-color: var(--primary-color);
+  padding: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Title in the card header */
+.card-header h3 {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  margin: 0;
+  color: var(--text-color);
+}
+
+/* Toggle icon in the card header */
+.toggle-icon {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease; /* Smooth rotation */
+}
+
+/* Content inside the schedule card */
+.card-content {
+  background-color: white;
+  padding: 0;
+  max-height: 0; /* Initially hidden */
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.5s ease; /* Smooth expand/collapse */
+}
+
+/* Active state for card content */
+.card-content.active {
+  padding: 20px;
+  max-height: 500px; /* Expanded height */
+}
+
+/* Rotate toggle icon when card content is active */
+.card-content.active + .card-header .toggle-icon {
+  transform: rotate(45deg);
+}
+
+/* Event details inside the schedule card */
+.event-detail {
+  margin-bottom: 15px;
+  display: flex;
+}
+
+/* Remove margin for the last event detail */
+.event-detail:last-child {
+  margin-bottom: 0;
+}
+
+/* Label for event details */
+.detail-label {
+  font-weight: 600;
+  min-width: 100px;
+  color: var(--accent-color);
+}
+
+/* Links in event details */
+.detail-value a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for links */
+.detail-value a:hover {
+  color: var(--text-color);
+  text-decoration: underline;
+}
+
+/* Save the date section */
+.save-date-section {
+  padding: 40px 0;
+  text-align: center;
+}
+
+/* Button for saving the date */
+.save-date-btn {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--accent-color)
+  );
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  font-family: var(--font-heading);
+  border-radius: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(162, 128, 232, 0.3); /* Subtle shadow */
+  transition: all 0.3s ease; /* Smooth hover effect */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover effect for the save date button */
+.save-date-btn:hover {
+  transform: translateY(-3px); /* Slight upward movement */
+  box-shadow: 0 6px 20px rgba(162, 128, 232, 0.4); /* Stronger shadow */
+}
+
+/* Animated gradient overlay for the button */
+.save-date-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+/* Move gradient overlay on hover */
+.save-date-btn:hover::before {
+  left: 100%;
+}
+
+/* Icon inside the button */
+.btn-icon {
+  transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+/* Enlarge icon on hover */
+.save-date-btn:hover .btn-icon {
+  transform: scale(1.2);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* Start slightly below */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* End at original position */
+  }
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem; /* Smaller title font size */
+  }
+
+  .subtitle {
+    font-size: 1.2rem; /* Smaller subtitle font size */
+  }
+
+  .countdown {
+    flex-wrap: wrap; /* Wrap countdown items */
+  }
+
+  .countdown-item {
+    min-width: 70px; /* Smaller width */
+    padding: 10px 15px; /* Smaller padding */
+  }
+
+  .countdown-item span {
+    font-size: 2rem; /* Smaller number font size */
+  }
+
+  #current-image {
+    height: 300px; /* Smaller image height */
+  }
+
+  .schedule-card {
+    margin-bottom: 15px; /* Smaller margin */
+  }
+
+  .card-header h3 {
+    font-size: 1.1rem; /* Smaller header font size */
+  }
+
+  .detail-label {
+    min-width: 80px; /* Smaller label width */
+  }
+}
+
+/* Further responsive styles for very small screens */
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem; /* Even smaller title font size */
+  }
+
+  .countdown-item {
+    min-width: 60px; /* Even smaller width */
+    padding: 8px 10px; /* Even smaller padding */
+  }
+
+  .countdown-item span {
+    font-size: 1.5rem; /* Even smaller number font size */
+  }
+
+  #current-image {
+    height: 250px; /* Even smaller image height */
+  }
+
+  .event-detail {
+    flex-direction: column; /* Stack event details vertically */
+  }
+
+  .detail-label {
+    margin-bottom: 5px; /* Add spacing between label and value */
+  }
+}

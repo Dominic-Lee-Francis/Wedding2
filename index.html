@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Metadata and external resources -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dom & Genie's Wedding</title>
+
+    <!-- Preconnect to Google Fonts for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Import custom fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header section -->
+      <header class="header">
+        <h1 class="title">Dom & Genie</h1>
+        <div class="subtitle">Are Getting Married</div>
+        <div class="date">22-23 November, 2025</div>
+      </header>
+
+      <!-- Countdown section -->
+      <section class="countdown-section">
+        <div class="countdown-container">
+          <div class="countdown-title">Counting Down To Our Special Day</div>
+          <div class="countdown">
+            <!-- Countdown items for days, hours, and minutes -->
+            <div class="countdown-item">
+              <span id="days">202</span>
+              <div class="countdown-label">Days</div>
+            </div>
+            <div class="countdown-item">
+              <span id="hours">00</span>
+              <div class="countdown-label">Hours</div>
+            </div>
+            <div class="countdown-item">
+              <span id="minutes">00</span>
+              <div class="countdown-label">Minutes</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Floral divider -->
+      <div class="floral-divider">
+        <img src="images/divider.png" alt="floral divider" />
+      </div>
+
+      <!-- Gallery section -->
+      <section class="gallery-section">
+        <div class="gallery-container">
+          <div class="gallery-title">Our Story</div>
+          <div class="gallery">
+            <!-- Placeholder for the current image -->
+            <img id="current-image" src="" alt="Wedding photo" />
+            <div class="gallery-nav">
+              <!-- Navigation buttons for the gallery -->
+              <button id="prev-btn" aria-label="Previous photo">‹</button>
+              <span id="image-counter">1/13</span>
+              <button id="next-btn" aria-label="Next photo">›</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Floral divider -->
+      <div class="floral-divider">
+        <img src="images/divider.png" alt="floral divider" />
+      </div>
+
+      <!-- Schedule section -->
+      <section class="schedule-section">
+        <h2 class="section-title">Wedding Events</h2>
+
+        <div class="schedule-container">
+          <!-- Day 1 event card -->
+          <div class="schedule-card">
+            <div class="card-header" id="day1-header">
+              <h3>Day 1: Ceremony & Reception</h3>
+              <span class="toggle-icon">+</span>
+            </div>
+            <div class="card-content" id="day1-content">
+              <!-- Event details for Day 1 -->
+              <div class="event-detail">
+                <span class="detail-label">When:</span>
+                <span class="detail-value">November 22, 2025 at 3:00 PM</span>
+              </div>
+              <div class="event-detail">
+                <span class="detail-label">Where:</span>
+                <span class="detail-value"
+                  ><a href="[insert venue link]" target="_blank"
+                    >[insert venue name]</a
+                  ></span
+                >
+              </div>
+              <div class="event-detail">
+                <span class="detail-label">Dress Code:</span>
+                <span class="detail-value">Formal Attire</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Day 2 event card -->
+          <div class="schedule-card">
+            <div class="card-header" id="day2-header">
+              <h3>Day 2: Brunch Celebration</h3>
+              <span class="toggle-icon">+</span>
+            </div>
+            <div class="card-content" id="day2-content">
+              <!-- Event details for Day 2 -->
+              <div class="event-detail">
+                <span class="detail-label">When:</span>
+                <span class="detail-value">November 23, 2025 at 11:00 AM</span>
+              </div>
+              <div class="event-detail">
+                <span class="detail-label">Where:</span>
+                <span class="detail-value"
+                  ><a href="[insert venue link]" target="_blank"
+                    >[insert venue name]</a
+                  ></span
+                >
+              </div>
+              <div class="event-detail">
+                <span class="detail-label">Dress Code:</span>
+                <span class="detail-value">Smart Casual</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Floral divider -->
+      <div class="floral-divider">
+        <img src="images/divider.png" alt="floral divider" />
+      </div>
+
+      <!-- Save the Date section -->
+      <section class="save-date-section">
+        <button class="save-date-btn" id="saveDateBtn">
+          <span class="btn-text">Save the Date</span>
+          <span class="btn-icon">❤</span>
+        </button>
+      </section>
+    </div>
+
+    <!-- Link to external JavaScript file -->
+    <script src="js/script.js"></script>
+  </body>
+</html>
