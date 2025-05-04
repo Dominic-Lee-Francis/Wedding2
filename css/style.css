@@ -1,12 +1,13 @@
 /* Define CSS variables for colors, fonts, and other reusable values */
 :root {
-  --primary-color: #e2d1f9; /* Light purple */
-  --secondary-color: #d0bdf4; /* Slightly darker purple */
-  --accent-color: #a280e8; /* Accent purple */
-  --text-color: #4a4453; /* Dark gray for text */
-  --light-text: #f8f7fa; /* Light text color */
-  --font-heading: "Playfair Display", serif; /* Font for headings */
-  --font-body: "Montserrat", sans-serif; /* Font for body text */
+  --primary-color: #e2d1f9; /* Light lilac */
+  --secondary-color: #d0bdf4; /* Medium lilac */
+  --dark-lilac: #b199df; /* New darker lilac */
+  --accent-color: #a280e8;
+  --text-color: #4a4453;
+  --light-text: #f8f7fa;
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Montserrat", sans-serif;
 }
 
 /* Reset default margin, padding, and box-sizing for all elements */
@@ -23,8 +24,8 @@ body {
   background: linear-gradient(
     to bottom,
     var(--primary-color) 0%,
-    #f8f3ff 50%,
-    white 100%
+    var(--secondary-color) 50%,
+    var(--dark-lilac) 100%
   );
   background-attachment: fixed;
   line-height: 1.6;
@@ -42,12 +43,6 @@ body {
 .header {
   text-align: center;
   padding: 40px 0;
-  background: linear-gradient(
-    135deg,
-    var(--primary-color),
-    var(--secondary-color)
-  );
-  color: var(--text-color);
   position: relative;
   overflow: hidden;
 }
@@ -60,7 +55,6 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("images/background-pattern.png") center/cover;
   opacity: 0.05; /* Low opacity for subtle effect */
   z-index: 0;
 }
@@ -96,12 +90,32 @@ body {
 }
 
 /* Countdown section with a semi-transparent background */
-.countdown-section {
+/* .countdown-section {
   padding: 40px 0;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.5);
+} */
+
+.countdown-section,
+.gallery-section,
+.schedule-section {
+  background-color: rgba(255, 255, 255, 0.15); /* More transparent */
+  backdrop-filter: blur(8px); /* Frosted glass effect */
+  border-radius: 12px; /* Softened edges */
+  margin: 20px auto;
+  max-width: 95%;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
+.header .title,
+.header .subtitle,
+.header .date,
+.section-title,
+.gallery-title,
+.countdown-title {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
 /* Center the countdown container */
 .countdown-container {
   max-width: 600px;
@@ -167,10 +181,10 @@ body {
 }
 
 /* Gallery section with semi-transparent background */
-.gallery-section {
+/* .gallery-section {
   padding: 40px 0;
   background-color: rgba(255, 255, 255, 0.5);
-}
+} */
 
 /* Center the gallery container */
 .gallery-container {
@@ -237,10 +251,10 @@ body {
 }
 
 /* Schedule section with semi-transparent background */
-.schedule-section {
+/* .schedule-section {
   padding: 40px 0;
   background-color: rgba(255, 255, 255, 0.5);
-}
+} */
 
 /* Title for sections */
 .section-title {
