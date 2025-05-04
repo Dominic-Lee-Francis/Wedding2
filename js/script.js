@@ -24,9 +24,14 @@ document.addEventListener("DOMContentLoaded", function () {
   updateCountdown();
   setInterval(updateCountdown, 60000);
 
+  //
+  //
+  //
   // Image Gallery
+  // Image Gallery with Auto-Cycle
   const imageCount = 13;
   let currentImageIndex = 1;
+  let autoSlideInterval;
   const imageElement = document.getElementById("current-image");
   const counterElement = document.getElementById("image-counter");
 
@@ -38,8 +43,9 @@ document.addEventListener("DOMContentLoaded", function () {
     images.push(img);
   }
 
-  function loadRandomImage() {
-    currentImageIndex = Math.floor(Math.random() * imageCount) + 1;
+  // Load image with fade effect
+  function loadImage(index) {
+    currentImageIndex = index;
     imageElement.src = `images/wedding${currentImageIndex}.jpg`;
     counterElement.textContent = `${currentImageIndex}/${imageCount}`;
     imageElement.style.opacity = 0;
@@ -48,35 +54,56 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 10);
   }
 
-  function loadNextImage() {
-    currentImageIndex =
+  // Auto-advance to next image
+  function nextImage() {
+    const newIndex =
       currentImageIndex >= imageCount ? 1 : currentImageIndex + 1;
-    imageElement.src = `images/wedding${currentImageIndex}.jpg`;
-    counterElement.textContent = `${currentImageIndex}/${imageCount}`;
-    imageElement.style.opacity = 0;
-    setTimeout(() => {
-      imageElement.style.opacity = 1;
-    }, 10);
+    loadImage(newIndex);
   }
 
-  function loadPrevImage() {
-    currentImageIndex =
+  // Start auto-cycling (3s interval)
+  function startAutoSlide() {
+    autoSlideInterval = setInterval(nextImage, 3000);
+  }
+
+  // Pause auto-cycling when user interacts
+  function pauseAutoSlide() {
+    clearInterval(autoSlideInterval);
+  }
+
+  // Initialize gallery
+  function initGallery() {
+    loadImage(Math.floor(Math.random() * imageCount) + 1); // Random first image
+    startAutoSlide();
+
+    // Pause on hover/focus for better UX
+    const gallery = document.querySelector(".gallery");
+    gallery.addEventListener("mouseenter", pauseAutoSlide);
+    gallery.addEventListener("mouseleave", startAutoSlide);
+    gallery.addEventListener("focusin", pauseAutoSlide);
+    gallery.addEventListener("focusout", startAutoSlide);
+  }
+
+  // Event listeners for manual navigation
+  document.getElementById("next-btn").addEventListener("click", () => {
+    pauseAutoSlide();
+    nextImage();
+    setTimeout(startAutoSlide, 10000); // Resume after 10s inactivity
+  });
+
+  document.getElementById("prev-btn").addEventListener("click", () => {
+    pauseAutoSlide();
+    const newIndex =
       currentImageIndex <= 1 ? imageCount : currentImageIndex - 1;
-    imageElement.src = `images/wedding${currentImageIndex}.jpg`;
-    counterElement.textContent = `${currentImageIndex}/${imageCount}`;
-    imageElement.style.opacity = 0;
-    setTimeout(() => {
-      imageElement.style.opacity = 1;
-    }, 10);
-  }
+    loadImage(newIndex);
+    setTimeout(startAutoSlide, 10000); // Resume after 10s inactivity
+  });
 
-  // Load first image
-  loadRandomImage();
+  // Initialize
+  initGallery();
 
-  // Event listeners for navigation
-  document.getElementById("next-btn").addEventListener("click", loadNextImage);
-  document.getElementById("prev-btn").addEventListener("click", loadPrevImage);
-
+  // NEW SECTION: Schedule Cards Toggle
+  // Toggle function for schedule cards
   // Schedule Cards Toggle
   const day1Header = document.getElementById("day1-header");
   const day1Content = document.getElementById("day1-content");
