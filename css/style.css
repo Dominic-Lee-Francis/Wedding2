@@ -18,10 +18,17 @@
 
 /* Base styles for the body */
 body {
-  font-family: var(--font-body); /* Use body font */
-  color: var(--text-color); /* Text color */
-  background-color: #fefcff; /* Light background */
-  line-height: 1.6; /* Line height for readability */
+  font-family: var(--font-body);
+  color: var(--text-color);
+  background: linear-gradient(
+    to bottom,
+    var(--primary-color) 0%,
+    #f8f3ff 50%,
+    white 100%
+  );
+  background-attachment: fixed;
+  line-height: 1.6;
+  min-height: 100vh;
 }
 
 /* Center content and add padding for the main container */
@@ -92,7 +99,7 @@ body {
 .countdown-section {
   padding: 40px 0;
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 /* Center the countdown container */
@@ -162,7 +169,7 @@ body {
 /* Gallery section with semi-transparent background */
 .gallery-section {
   padding: 40px 0;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 /* Center the gallery container */
@@ -232,7 +239,7 @@ body {
 /* Schedule section with semi-transparent background */
 .schedule-section {
   padding: 40px 0;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 /* Title for sections */
