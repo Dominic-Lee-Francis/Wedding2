@@ -90,11 +90,11 @@ body {
 }
 
 /* Countdown section with a semi-transparent background */
-/* .countdown-section {
+.countdown-section {
   padding: 40px 0;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.5);
-} */
+}
 
 .gallery-section {
   padding: 10px 0;
@@ -118,6 +118,7 @@ body {
 .countdown-title {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
+
 /* Center the countdown container */
 .countdown-container {
   max-width: 600px;
@@ -171,23 +172,6 @@ body {
   margin-top: 5px;
 }
 
-/* Divider with floral image */
-.floral-divider {
-  text-align: center;
-  padding: 20px 0;
-}
-
-.floral-divider img {
-  max-width: 200px;
-  opacity: 0.7; /* Slightly transparent */
-}
-
-/* Gallery section with semi-transparent background */
-/* .gallery-section {
-  padding: 40px 0;
-  background-color: rgba(255, 255, 255, 0.5);
-} */
-
 /* Center the gallery container */
 .gallery-container {
   max-width: 800px;
@@ -224,11 +208,15 @@ body {
 
 /* Navigation buttons for the gallery */
 .gallery-nav {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
-  background-color: white;
+  transform: translateY(-50%);
+  pointer-events: none; /* Prevent blocking clicks on the image */
 }
 
 /* Gallery navigation buttons */
@@ -237,9 +225,20 @@ body {
   border: none;
   font-size: 2rem;
   cursor: pointer;
-  color: var(--accent-color);
+  color: white;
+  background-color: rgba(74, 68, 83, 0.8);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+  pointer-events: none; /* Prevent clicks on the buttons */
+  margin: 0 10px; /* Space between buttons */
   padding: 0 15px;
   transition: transform 0.3s ease; /* Smooth hover effect */
+  pointer-events: all; /* Enable clicks on the buttons */
 }
 
 /* Hover effect for gallery navigation buttons */

@@ -33,7 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentImageIndex = 1;
   let autoSlideInterval;
   const imageElement = document.getElementById("current-image");
-  const counterElement = document.getElementById("image-counter");
 
   // Preload images
   const images = [];
@@ -47,7 +46,6 @@ document.addEventListener("DOMContentLoaded", function () {
   function loadImage(index) {
     currentImageIndex = index;
     imageElement.src = `images/wedding${currentImageIndex}.jpg`;
-    counterElement.textContent = `${currentImageIndex}/${imageCount}`;
     imageElement.style.opacity = 0;
     setTimeout(() => {
       imageElement.style.opacity = 1;
@@ -63,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Start auto-cycling (3s interval)
   function startAutoSlide() {
-    autoSlideInterval = setInterval(nextImage, 3000);
+    autoSlideInterval = setInterval(nextImage, 4000);
   }
 
   // Pause auto-cycling when user interacts
@@ -88,7 +86,8 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("next-btn").addEventListener("click", () => {
     pauseAutoSlide();
     nextImage();
-    setTimeout(startAutoSlide, 10000); // Resume after 10s inactivity
+    clearTimeout(autoSlideInterval); // Clear any existing timeout
+    autoSlideInterval = setTimeout(startAutoSlide, 10000); // Resume after 10s inactivity
   });
 
   document.getElementById("prev-btn").addEventListener("click", () => {
@@ -96,7 +95,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const newIndex =
       currentImageIndex <= 1 ? imageCount : currentImageIndex - 1;
     loadImage(newIndex);
-    setTimeout(startAutoSlide, 10000); // Resume after 10s inactivity
+    clearTimeout(autoSlideInterval); // Clear any existing timeout
+    autoSlideInterval = setTimeout(startAutoSlide, 10000); // Resume after 10s inactivity
   });
 
   // Initialize
@@ -135,29 +135,29 @@ document.addEventListener("DOMContentLoaded", function () {
     createConfetti();
   });
 
-  function createConfetti() {
-    const confettiCount = 50;
-    const container = document.querySelector(".save-date-section");
+  // function createConfetti() {
+  //   const confettiCount = 50;
+  //   const container = document.querySelector(".save-date-section");
 
-    for (let i = 0; i < confettiCount; i++) {
-      const confetti = document.createElement("div");
-      confetti.className = "confetti";
-      confetti.style.left = Math.random() * 100 + "vw";
-      confetti.style.backgroundColor = getRandomColor();
-      confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
-      confetti.style.animationDelay = Math.random() * 0.5 + "s";
-      container.appendChild(confetti);
+  //   for (let i = 0; i < confettiCount; i++) {
+  //     const confetti = document.createElement("div");
+  //     confetti.className = "confetti";
+  //     confetti.style.left = Math.random() * 100 + "vw";
+  //     confetti.style.backgroundColor = getRandomColor();
+  //     confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
+  //     confetti.style.animationDelay = Math.random() * 0.5 + "s";
+  //     container.appendChild(confetti);
 
-      setTimeout(() => {
-        confetti.remove();
-      }, 3000);
-    }
-  }
+  //     setTimeout(() => {
+  //       confetti.remove();
+  //     }, 3000);
+  //   }
+  // }
 
-  function getRandomColor() {
-    const colors = ["#e2d1f9", "#d0bdf4", "#a280e8", "#845ec2", "#6c5ce7"];
-    return colors[Math.floor(Math.random() * colors.length)];
-  }
+  // function getRandomColor() {
+  //   const colors = ["#e2d1f9", "#d0bdf4", "#a280e8", "#845ec2", "#6c5ce7"];
+  //   return colors[Math.floor(Math.random() * colors.length)];
+  // }
 
   // Add some subtle animations on scroll
   const animateOnScroll = function () {
