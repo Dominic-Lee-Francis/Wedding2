@@ -122,43 +122,79 @@ document.addEventListener("DOMContentLoaded", function () {
     icon.textContent = day2Content.classList.contains("active") ? "−" : "+";
   });
 
-  // Save the Date Button Animation
+  // Save the Date Button with Reliable Confetti
   const saveDateBtn = document.getElementById("saveDateBtn");
 
   saveDateBtn.addEventListener("click", function () {
+    // 1. Button press animation
     this.classList.add("clicked");
-    setTimeout(() => {
-      this.classList.remove("clicked");
-    }, 300);
+    setTimeout(() => this.classList.remove("clicked"), 300);
 
-    // Create confetti effect
-    createConfetti();
+    // 2. Create confetti
+    createCustomConfetti();
+
+    // 3. Trigger calendar download after delay
+    setTimeout(createCalendarFile, 800);
   });
 
-  // function createConfetti() {
-  //   const confettiCount = 50;
-  //   const container = document.querySelector(".save-date-section");
+  function createCustomConfetti() {
+    const confettiCount = 30;
+    const buttonRect = saveDateBtn.getBoundingClientRect();
+    const originX = buttonRect.left + buttonRect.width / 2;
+    const originY = buttonRect.top + buttonRect.height / 2;
 
-  //   for (let i = 0; i < confettiCount; i++) {
-  //     const confetti = document.createElement("div");
-  //     confetti.className = "confetti";
-  //     confetti.style.left = Math.random() * 100 + "vw";
-  //     confetti.style.backgroundColor = getRandomColor();
-  //     confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
-  //     confetti.style.animationDelay = Math.random() * 0.5 + "s";
-  //     container.appendChild(confetti);
+    for (let i = 0; i < confettiCount; i++) {
+      const confetti = new Image();
+      confetti.src = "images/wonwon.png";
+      confetti.className = "wonwon-confetti";
 
-  //     setTimeout(() => {
-  //       confetti.remove();
-  //     }, 3000);
-  //   }
-  // }
+      // Calculate random movement (pre-calculated pixels)
+      const angle = Math.random() * Math.PI * 2; // Random direction
+      const distance = 200 + Math.random() * 150; // 100-250px
+      const moveX = Math.cos(angle) * distance;
+      const moveY = Math.sin(angle) * distance;
 
-  // function getRandomColor() {
-  //   const colors = ["#e2d1f9", "#d0bdf4", "#a280e8", "#845ec2", "#6c5ce7"];
-  //   return colors[Math.floor(Math.random() * colors.length)];
-  // }
+      // Set CSS custom properties
+      confetti.style.setProperty("--move-x", `${moveX}px`);
+      confetti.style.setProperty("--move-y", `${moveY}px`);
+      confetti.style.setProperty(
+        "--rotation",
+        `${Math.random() * 720 - 360}deg`
+      );
 
+      // Position at button center
+      confetti.style.left = `${originX}px`;
+      confetti.style.top = `${originY}px`;
+      confetti.style.width = `${15 + Math.random() * 20}px`;
+
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 2000);
+    }
+  }
+
+  function createCalendarFile() {
+    const eventData = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "BEGIN:VEVENT",
+      "SUMMARY:Dom & Genie's Wedding",
+      "DTSTART:20251122T150000",
+      "DTEND:20251123T140000",
+      `LOCATION:[Insert Venue Address]`,
+      `DESCRIPTION:For details, visit: ${window.location.href}`,
+      "END:VEVENT",
+      "END:VCALENDAR",
+    ].join("\n");
+
+    const blob = new Blob([eventData], { type: "text/calendar" });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "Dom-Genie-Wedding.ics";
+    link.click();
+    URL.revokeObjectURL(url);
+  }
   // Add some subtle animations on scroll
   const animateOnScroll = function () {
     const elements = document.querySelectorAll(

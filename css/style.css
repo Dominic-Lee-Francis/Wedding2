@@ -361,13 +361,15 @@ body {
   text-decoration: underline;
 }
 
-/* Save the date section */
+/* ===== Save the Date Section ===== */
 .save-date-section {
   padding: 40px 0;
   text-align: center;
+  position: relative; /* Essential for confetti positioning */
+  z-index: 1;
 }
 
-/* Button for saving the date */
+/* ===== Main Button Styles ===== */
 .save-date-btn {
   background: linear-gradient(
     135deg,
@@ -381,52 +383,76 @@ body {
   font-family: var(--font-heading);
   border-radius: 50px;
   cursor: pointer;
-  display: flex;
+  display: inline-flex; /* Changed to inline-flex for better centering */
   align-items: center;
   gap: 10px;
-  margin: 0 auto;
-  box-shadow: 0 4px 15px rgba(162, 128, 232, 0.3); /* Subtle shadow */
-  transition: all 0.3s ease; /* Smooth hover effect */
+  box-shadow: 0 4px 15px rgba(162, 128, 232, 0.3);
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  z-index: 10; /* Above confetti */
 }
 
-/* Hover effect for the save date button */
+/* Button Interactions */
 .save-date-btn:hover {
-  transform: translateY(-3px); /* Slight upward movement */
-  box-shadow: 0 6px 20px rgba(162, 128, 232, 0.4); /* Stronger shadow */
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(162, 128, 232, 0.4);
 }
 
-/* Animated gradient overlay for the button */
-.save-date-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
-  transition: 0.5s;
+.save-date-btn.clicked {
+  transform: scale(0.95);
 }
 
-/* Move gradient overlay on hover */
-.save-date-btn:hover::before {
-  left: 100%;
+/* ===== Wonwon Confetti ===== */
+.wonwon-confetti {
+  position: fixed; /* Changed from absolute to fixed for reliable positioning */
+  display: block;
+  width: 30px;
+  height: auto;
+  pointer-events: none;
+  z-index: 5;
+  transform-origin: center;
+  will-change: transform, opacity;
+  animation: wonwonMove 2s ease-out forwards, wonwonFade 2s ease-out forwards;
 }
 
-/* Icon inside the button */
-.btn-icon {
-  transition: transform 0.3s ease; /* Smooth hover effect */
+/* Keyframe Animations */
+@keyframes wonwonMove {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate(var(--move-x), var(--move-y)) rotate(var(--rotation));
+  }
 }
 
-/* Enlarge icon on hover */
-.save-date-btn:hover .btn-icon {
-  transform: scale(1.2);
+@keyframes wonwonSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wonwonFade {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Each confetti element should have unique custom properties */
+element.style {
+  --random-x: 0.34;
+  --random-y: 0.72;
+  --spread: 187px;
+  --rotation: 127deg;
 }
 
 /* Fade-in animation */
