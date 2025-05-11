@@ -29,12 +29,12 @@ document.addEventListener("DOMContentLoaded", function () {
   //
   // Image Gallery
   // Image Gallery with Auto-Cycle
-  const imageCount = 13;
-  let currentImageIndex = 1;
+  const imageCount = 24;
+  let currentImageIndex = 0;
   let autoSlideInterval;
   const imageElement = document.getElementById("current-image");
 
-  // Preload images
+  // Preload and shuffle images
   const images = [];
   for (let i = 1; i <= imageCount; i++) {
     const img = new Image();
@@ -42,10 +42,19 @@ document.addEventListener("DOMContentLoaded", function () {
     images.push(img);
   }
 
+  // Shuffle function
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+  shuffleArray(images);
+
   // Load image with fade effect
   function loadImage(index) {
     currentImageIndex = index;
-    imageElement.src = `images/wedding${currentImageIndex}.jpg`;
+    imageElement.src = images[currentImageIndex].src;
     imageElement.style.opacity = 0;
     setTimeout(() => {
       imageElement.style.opacity = 1;
@@ -55,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Auto-advance to next image
   function nextImage() {
     const newIndex =
-      currentImageIndex >= imageCount ? 1 : currentImageIndex + 1;
+      currentImageIndex >= images.length - 1 ? 0 : currentImageIndex + 1;
     loadImage(newIndex);
   }
 
@@ -71,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initialize gallery
   function initGallery() {
-    loadImage(Math.floor(Math.random() * imageCount) + 1); // Random first image
+    loadImage(0); // Start with the first image in the shuffled array
     startAutoSlide();
 
     // Pause on hover/focus for better UX
