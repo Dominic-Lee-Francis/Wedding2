@@ -1,8 +1,10 @@
-/* Define CSS variables for colors, fonts, and other reusable values */
+/* ============================================================
+  CSS Variables: Colors, Fonts, and Reusable Values
+  ============================================================ */
 :root {
   --primary-color: #e2d1f9; /* Light lilac */
   --secondary-color: #d0bdf4; /* Medium lilac */
-  --dark-lilac: #b199df; /* New darker lilac */
+  --dark-lilac: #b199df; /* Darker lilac */
   --accent-color: #a280e8;
   --text-color: #4a4453;
   --light-text: #f8f7fa;
@@ -10,14 +12,15 @@
   --font-body: "Montserrat", sans-serif;
 }
 
-/* Reset default margin, padding, and box-sizing for all elements */
+/* ============================================================
+  Global Reset and Base Styles
+  ============================================================ */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Base styles for the body */
 body {
   font-family: var(--font-body);
   color: var(--text-color);
@@ -32,14 +35,15 @@ body {
   min-height: 100vh;
 }
 
-/* Center content and add padding for the main container */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-/* Header section with gradient background and centered text */
+/* ============================================================
+  Header Section
+  ============================================================ */
 .header {
   text-align: center;
   padding: 40px 0;
@@ -47,7 +51,7 @@ body {
   overflow: hidden;
 }
 
-/* Add a subtle background pattern to the header */
+/* Subtle background pattern for header */
 .header::before {
   content: "";
   position: absolute;
@@ -55,61 +59,39 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  opacity: 0.05; /* Low opacity for subtle effect */
+  opacity: 0.05;
   z-index: 0;
 }
 
-/* Title styles in the header */
+/* Header Titles and Animations */
 .title {
-  font-family: var(--font-heading); /* Use heading font */
-  font-size: 3.5rem; /* Large font size */
-  font-weight: 600; /* Bold */
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  font-weight: 600;
   margin-bottom: 10px;
   position: relative;
-  z-index: 1; /* Ensure it appears above the background */
-  animation: fadeIn 1.5s ease-out; /* Fade-in animation */
+  z-index: 1;
+  animation: fadeIn 1.5s ease-out;
 }
 
-/* Subtitle styles in the header */
 .subtitle {
   font-family: var(--font-heading);
   font-size: 1.5rem;
-  font-weight: 400; /* Regular weight */
+  font-weight: 400;
   margin-bottom: 5px;
   position: relative;
   z-index: 1;
-  animation: fadeIn 1.5s ease-out 0.3s both; /* Delayed fade-in animation */
+  animation: fadeIn 1.5s ease-out 0.3s both;
 }
 
-/* Date text in the header */
 .date {
   font-size: 1.2rem;
   position: relative;
   z-index: 1;
-  animation: fadeIn 1.5s ease-out 0.6s both; /* Further delayed fade-in */
+  animation: fadeIn 1.5s ease-out 0.6s both;
 }
 
-/* Countdown section with a semi-transparent background */
-.countdown-section {
-  padding: 40px 0;
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-.gallery-section {
-  padding: 10px 0;
-}
-.countdown-section,
-.schedule-section {
-  background-color: rgba(255, 255, 255, 0.15); /* More transparent */
-  backdrop-filter: blur(8px); /* Frosted glass effect */
-  border-radius: 12px; /* Softened edges */
-  margin: 20px auto;
-  max-width: 95%;
-  padding: 30px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
+/* Text shadow for header and section titles */
 .header .title,
 .header .subtitle,
 .header .date,
@@ -119,13 +101,32 @@ body {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Center the countdown container */
+/* ============================================================
+  Countdown Section
+  ============================================================ */
+.countdown-section {
+  padding: 40px 0;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Frosted glass effect for countdown and schedule */
+.countdown-section,
+.schedule-section {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  margin: 20px auto;
+  max-width: 95%;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
 .countdown-container {
   max-width: 600px;
   margin: 0 auto;
 }
 
-/* Title for the countdown section */
 .countdown-title {
   font-family: var(--font-heading);
   font-size: 1.8rem;
@@ -133,52 +134,54 @@ body {
   color: var(--text-color);
 }
 
-/* Countdown items displayed in a row */
+/* Countdown Items Layout */
 .countdown {
   display: flex;
   justify-content: center;
-  gap: 20px; /* Space between items */
+  gap: 20px;
 }
 
-/* Individual countdown item styles */
 .countdown-item {
   background-color: var(--primary-color);
   padding: 15px 25px;
-  border-radius: 8px; /* Rounded corners */
+  border-radius: 8px;
   min-width: 90px;
-  box-shadow: 0 4px 15px rgba(162, 128, 232, 0.2); /* Subtle shadow */
-  transition: transform 0.3s ease; /* Smooth hover effect */
+  box-shadow: 0 4px 15px rgba(162, 128, 232, 0.2);
+  transition: transform 0.3s ease;
 }
 
-/* Hover effect for countdown items */
 .countdown-item:hover {
-  transform: translateY(-5px); /* Slight upward movement */
+  transform: translateY(-5px);
 }
 
-/* Number in the countdown item */
+/* Countdown Numbers and Labels */
 .countdown-item span {
   font-family: var(--font-heading);
   font-size: 2.5rem;
   font-weight: 600;
   display: block;
-  color: var(--accent-color); /* Accent color */
+  color: var(--accent-color);
 }
 
-/* Label below the number in countdown items */
 .countdown-label {
   font-size: 0.9rem;
-  text-transform: uppercase; /* Uppercase text */
-  letter-spacing: 1px; /* Spacing between letters */
+  text-transform: uppercase;
+  letter-spacing: 1px;
   margin-top: 5px;
 }
 
-/* Center the gallery container */
+/* ============================================================
+  Gallery Section
+  ============================================================ */
+.gallery-section {
+  padding: 10px 0;
+}
+
 .gallery-container {
   max-width: 800px;
   margin: 0 auto;
 }
 
-/* Title for the gallery section */
 .gallery-title {
   font-family: var(--font-heading);
   font-size: 2rem;
@@ -187,26 +190,25 @@ body {
   color: var(--text-color);
 }
 
-/* Gallery container with rounded corners and shadow */
+/* Gallery Layout and Image */
 .gallery {
   position: relative;
   margin: 0 auto;
   max-width: 100%;
   overflow: hidden;
   border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* Current image in the gallery */
 #current-image {
   width: 100%;
   height: 400px;
-  object-fit: cover; /* Ensure image covers the area */
+  object-fit: cover;
   display: block;
-  transition: opacity 0.5s ease; /* Smooth fade effect */
+  transition: opacity 0.5s ease;
 }
 
-/* Navigation buttons for the gallery */
+/* Gallery Navigation Buttons */
 .gallery-nav {
   position: absolute;
   top: 50%;
@@ -216,10 +218,9 @@ body {
   justify-content: space-between;
   align-items: center;
   transform: translateY(-50%);
-  pointer-events: none; /* Prevent blocking clicks on the image */
+  pointer-events: none;
 }
 
-/* Gallery navigation buttons */
 .gallery-nav button {
   background: none;
   border: none;
@@ -233,31 +234,28 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color 0.3s ease; /* Smooth hover effect */
-  pointer-events: none; /* Prevent clicks on the buttons */
-  margin: 0 10px; /* Space between buttons */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  pointer-events: all;
+  margin: 0 10px;
   padding: 0 15px;
-  transition: transform 0.3s ease; /* Smooth hover effect */
-  pointer-events: all; /* Enable clicks on the buttons */
 }
 
-/* Hover effect for gallery navigation buttons */
 .gallery-nav button:hover {
-  transform: scale(1.2); /* Slightly enlarge */
+  transform: scale(1.2);
 }
 
-/* Counter for the gallery */
 #image-counter {
   font-family: var(--font-heading);
 }
 
-/* Schedule section with semi-transparent background */
+/* ============================================================
+  Schedule Section
+  ============================================================ */
 /* .schedule-section {
   padding: 40px 0;
   background-color: rgba(255, 255, 255, 0.5);
 } */
 
-/* Title for sections */
 .section-title {
   font-family: var(--font-heading);
   font-size: 2rem;
@@ -266,27 +264,25 @@ body {
   color: var(--text-color);
 }
 
-/* Center the schedule container */
 .schedule-container {
   max-width: 800px;
   margin: 0 auto;
 }
 
-/* Individual schedule card styles */
+/* Schedule Cards */
 .schedule-card {
   margin-bottom: 20px;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  transition: transform 0.3s ease; /* Smooth hover effect */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-/* Hover effect for schedule cards */
 .schedule-card:hover {
-  transform: translateY(-5px); /* Slight upward movement */
+  transform: translateY(-5px);
 }
 
-/* Header of the schedule card */
+/* Card Header */
 .card-header {
   background-color: var(--primary-color);
   padding: 20px;
@@ -296,7 +292,6 @@ body {
   align-items: center;
 }
 
-/* Title in the card header */
 .card-header h3 {
   font-family: var(--font-heading);
   font-size: 1.3rem;
@@ -304,72 +299,68 @@ body {
   color: var(--text-color);
 }
 
-/* Toggle icon in the card header */
 .toggle-icon {
   font-size: 1.5rem;
-  transition: transform 0.3s ease; /* Smooth rotation */
+  transition: transform 0.3s ease;
 }
 
-/* Content inside the schedule card */
+/* Card Content (Collapsible) */
 .card-content {
   background-color: white;
   padding: 0;
-  max-height: 0; /* Initially hidden */
+  max-height: 0;
   overflow: hidden;
-  transition: max-height 0.5s ease, padding 0.5s ease; /* Smooth expand/collapse */
+  transition: max-height 0.5s ease, padding 0.5s ease;
 }
 
-/* Active state for card content */
 .card-content.active {
   padding: 20px;
-  max-height: 500px; /* Expanded height */
+  max-height: 500px;
 }
 
-/* Rotate toggle icon when card content is active */
+/* Rotate toggle icon when card is active */
 .card-content.active + .card-header .toggle-icon {
   transform: rotate(45deg);
 }
 
-/* Event details inside the schedule card */
+/* Event Details */
 .event-detail {
   margin-bottom: 15px;
   display: flex;
 }
 
-/* Remove margin for the last event detail */
 .event-detail:last-child {
   margin-bottom: 0;
 }
 
-/* Label for event details */
 .detail-label {
   font-weight: 600;
   min-width: 100px;
   color: var(--accent-color);
 }
 
-/* Links in event details */
 .detail-value a {
   color: var(--accent-color);
   text-decoration: none;
-  transition: color 0.3s ease; /* Smooth hover effect */
+  transition: color 0.3s ease;
 }
 
-/* Hover effect for links */
 .detail-value a:hover {
   color: var(--text-color);
   text-decoration: underline;
 }
 
-/* ===== Save the Date Section ===== */
+/* ============================================================
+  Save the Date Section & Button
+  ============================================================ */
 .save-date-section {
   padding: 40px 0;
   text-align: center;
-  position: relative; /* Essential for confetti positioning */
+  position: relative;
   z-index: 1;
 }
 
-/* ===== Main Button Styles ===== */
+/* Main Button Styles */
 .save-date-btn {
   background: linear-gradient(
     135deg,
@@ -383,17 +374,16 @@ body {
   font-family: var(--font-heading);
   border-radius: 50px;
   cursor: pointer;
-  display: inline-flex; /* Changed to inline-flex for better centering */
+  display: inline-flex;
   align-items: center;
   gap: 10px;
   box-shadow: 0 4px 15px rgba(162, 128, 232, 0.3);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  z-index: 10; /* Above confetti */
+  z-index: 10;
 }
 
-/* Button Interactions */
 .save-date-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(162, 128, 232, 0.4);
@@ -403,9 +393,11 @@ body {
   transform: scale(0.95);
 }
 
-/* ===== Wonwon Confetti ===== */
+/* ============================================================
+  Wonwon Confetti Animation
+  ============================================================ */
 .wonwon-confetti {
-  position: fixed; /* Changed from absolute to fixed for reliable positioning */
+  position: fixed;
   display: block;
   width: 30px;
   height: auto;
@@ -416,7 +408,7 @@ body {
   animation: wonwonMove 2s ease-out forwards, wonwonFade 2s ease-out forwards;
 }
 
-/* Keyframe Animations */
+/* Keyframes for Confetti */
 @keyframes wonwonMove {
   0% {
     transform: translate(0, 0) rotate(0deg);
@@ -447,90 +439,84 @@ body {
   }
 }
 
-/* Each confetti element should have unique custom properties */
+/* Example: Each confetti element should have unique custom properties */
+/*
 element.style {
   --random-x: 0.34;
   --random-y: 0.72;
   --spread: 187px;
   --rotation: 127deg;
 }
+*/
 
-/* Fade-in animation */
+/* ============================================================
+  Animations
+  ============================================================ */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px); /* Start slightly below */
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateY(0); /* End at original position */
+    transform: translateY(0);
   }
 }
 
-/* Responsive styles for smaller screens */
+/* ============================================================
+  Responsive Styles
+  ============================================================ */
+/* Medium screens (tablets) */
 @media (max-width: 768px) {
   .title {
-    font-size: 2.5rem; /* Smaller title font size */
+    font-size: 2.5rem;
   }
-
   .subtitle {
-    font-size: 1.2rem; /* Smaller subtitle font size */
+    font-size: 1.2rem;
   }
-
   .countdown {
-    flex-wrap: wrap; /* Wrap countdown items */
+    flex-wrap: wrap;
   }
-
   .countdown-item {
-    min-width: 70px; /* Smaller width */
-    padding: 10px 15px; /* Smaller padding */
+    min-width: 70px;
+    padding: 10px 15px;
   }
-
   .countdown-item span {
-    font-size: 2rem; /* Smaller number font size */
+    font-size: 2rem;
   }
-
   #current-image {
-    height: 300px; /* Smaller image height */
+    height: 300px;
   }
-
   .schedule-card {
-    margin-bottom: 15px; /* Smaller margin */
+    margin-bottom: 15px;
   }
-
   .card-header h3 {
-    font-size: 1.1rem; /* Smaller header font size */
+    font-size: 1.1rem;
   }
-
   .detail-label {
-    min-width: 80px; /* Smaller label width */
+    min-width: 80px;
   }
 }
 
-/* Further responsive styles for very small screens */
+/* Small screens (phones) */
 @media (max-width: 480px) {
   .title {
-    font-size: 2rem; /* Even smaller title font size */
+    font-size: 2rem;
   }
-
   .countdown-item {
-    min-width: 60px; /* Even smaller width */
-    padding: 8px 10px; /* Even smaller padding */
+    min-width: 60px;
+    padding: 8px 10px;
   }
-
   .countdown-item span {
-    font-size: 1.5rem; /* Even smaller number font size */
+    font-size: 1.5rem;
   }
-
   #current-image {
-    height: 250px; /* Even smaller image height */
+    height: 250px;
   }
-
   .event-detail {
-    flex-direction: column; /* Stack event details vertically */
+    flex-direction: column;
   }
-
   .detail-label {
-    margin-bottom: 5px; /* Add spacing between label and value */
+    margin-bottom: 5px;
   }
 }
