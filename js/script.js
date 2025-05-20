@@ -69,6 +69,13 @@ document.addEventListener("DOMContentLoaded", function () {
     loadImage(newIndex);
   }
 
+  // --- Previous image ---
+  function prevImage() {
+    const newIndex =
+      currentImageIndex <= 0 ? images.length - 1 : currentImageIndex - 1;
+    loadImage(newIndex);
+  }
+
   // --- Start and pause auto-cycling ---
   function startAutoSlide() {
     autoSlideInterval = setInterval(nextImage, 4000);
@@ -88,6 +95,36 @@ document.addEventListener("DOMContentLoaded", function () {
     gallery.addEventListener("mouseleave", startAutoSlide);
     gallery.addEventListener("focusin", pauseAutoSlide);
     gallery.addEventListener("focusout", startAutoSlide);
+
+    // --- Touch support: swipe left/right to navigate ---
+    let touchStartX = null;
+    let touchStartY = null;
+    gallery.addEventListener("touchstart", function (e) {
+      if (e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }
+    });
+    gallery.addEventListener("touchend", function (e) {
+      if (touchStartX === null || touchStartY === null) return;
+      const touchEndX = e.changedTouches[0].clientX;
+      const touchEndY = e.changedTouches[0].clientY;
+      const dx = touchEndX - touchStartX;
+      const dy = touchEndY - touchStartY;
+      // Only trigger if horizontal swipe is dominant
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+        pauseAutoSlide();
+        if (dx < 0) {
+          nextImage();
+        } else {
+          prevImage();
+        }
+        clearTimeout(autoSlideInterval);
+        autoSlideInterval = setTimeout(startAutoSlide, 10000);
+      }
+      touchStartX = null;
+      touchStartY = null;
+    });
   }
 
   // --- Manual navigation buttons ---
@@ -100,11 +137,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.getElementById("prev-btn").addEventListener("click", () => {
     pauseAutoSlide();
-    const newIndex =
-      currentImageIndex <= 1 ? imageCount : currentImageIndex - 1;
-    loadImage(newIndex);
+    prevImage();
     clearTimeout(autoSlideInterval); // Clear any existing timeout
     autoSlideInterval = setTimeout(startAutoSlide, 10000); // Resume after 10s inactivity
+  });
+
+  // --- Touch support for navigation buttons ---
+  document.getElementById("next-btn").addEventListener("touchend", (e) => {
+    e.preventDefault();
+    pauseAutoSlide();
+    nextImage();
+    clearTimeout(autoSlideInterval);
+    autoSlideInterval = setTimeout(startAutoSlide, 10000);
+  });
+
+  document.getElementById("prev-btn").addEventListener("touchend", (e) => {
+    e.preventDefault();
+    pauseAutoSlide();
+    prevImage();
+    clearTimeout(autoSlideInterval);
+    autoSlideInterval = setTimeout(startAutoSlide, 10000);
   });
 
   // --- Initialize gallery ---
@@ -117,32 +169,55 @@ document.addEventListener("DOMContentLoaded", function () {
   const day2Header = document.getElementById("day2-header");
   const day2Content = document.getElementById("day2-content");
 
-  day1Header.addEventListener("click", () => {
-    day1Content.classList.toggle("active");
-    const icon = day1Header.querySelector(".toggle-icon");
-    icon.textContent = day1Content.classList.contains("active") ? "−" : "+";
-  });
+  function toggleDayContent(header, content) {
+    content.classList.toggle("active");
+    const icon = header.querySelector(".toggle-icon");
+    icon.textContent = content.classList.contains("active") ? "−" : "+";
+  }
 
-  day2Header.addEventListener("click", () => {
-    day2Content.classList.toggle("active");
-    const icon = day2Header.querySelector(".toggle-icon");
-    icon.textContent = day2Content.classList.contains("active") ? "−" : "+";
+  // Click events
+  day1Header.addEventListener("click", () =>
+    toggleDayContent(day1Header, day1Content)
+  );
+  day2Header.addEventListener("click", () =>
+    toggleDayContent(day2Header, day2Content)
+  );
+
+  // Touch events (for mobile/touch devices)
+  day1Header.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    toggleDayContent(day1Header, day1Content);
+  });
+  day2Header.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    toggleDayContent(day2Header, day2Content);
   });
 
   // ===================== 4. Save the Date Button with Confetti =====================
   const saveDateBtn = document.getElementById("saveDateBtn");
 
-  saveDateBtn.addEventListener("click", function () {
+  function handleSaveDateAction(e) {
+    // Prevent duplicate triggers (e.g., touch and click)
+    if (handleSaveDateAction.locked) return;
+    handleSaveDateAction.locked = true;
+    setTimeout(() => (handleSaveDateAction.locked = false), 500);
+
     // --- Button press animation ---
-    this.classList.add("clicked");
-    setTimeout(() => this.classList.remove("clicked"), 300);
+    saveDateBtn.classList.add("clicked");
+    setTimeout(() => saveDateBtn.classList.remove("clicked"), 300);
 
     // --- Create confetti ---
     createCustomConfetti();
 
     // --- Trigger calendar download after delay ---
     setTimeout(createCalendarFile, 800);
-  });
+
+    // Prevent default for touch events
+    if (e && e.type === "touchend") e.preventDefault();
+  }
+
+  saveDateBtn.addEventListener("click", handleSaveDateAction);
+  saveDateBtn.addEventListener("touchend", handleSaveDateAction);
 
   // --- Confetti effect ---
   function createCustomConfetti() {
@@ -158,7 +233,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Calculate random movement (pre-calculated pixels)
       const angle = Math.random() * Math.PI * 2; // Random direction
-      const distance = 200 + Math.random() * 150; // 100-250px
+      const distance = 200 + Math.random() * 150; // 200-350px
       const moveX = Math.cos(angle) * distance;
       const moveY = Math.sin(angle) * distance;
 
@@ -245,8 +320,8 @@ document.addEventListener("DOMContentLoaded", function () {
   style.textContent = `
     .floating-wonwon {
         position: fixed;
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
         pointer-events: none;
         z-index: 1000;
         transform: translate(-50%, -50%);
@@ -328,6 +403,7 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
       for (let i = 0; i < e.touches.length; i++) {
         const touch = e.touches[i];
+        // Create more wonwons here for each touch
         createWonwonAtPosition(touch.clientX, touch.clientY);
       }
     },
@@ -336,6 +412,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // --- Also work with mouse clicks for hybrid devices ---
   document.addEventListener("click", function (e) {
+    // Create more wonwons here for each click
     createWonwonAtPosition(e.clientX, e.clientY);
   });
 });
