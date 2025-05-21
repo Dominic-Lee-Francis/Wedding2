@@ -104,70 +104,87 @@ body {
 /* ============================================================
   Countdown Section
   ============================================================ */
+/* ===== Countdown Section - Single Line Version ===== */
 .countdown-section {
-  padding: 40px 0;
+  padding: clamp(20px, 4vw, 40px) 0;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.5);
-}
-
-/* Frosted glass effect for countdown and schedule */
-.countdown-section,
-.schedule-section {
-  background-color: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  border-radius: 12px;
-  margin: 20px auto;
-  max-width: 95%;
-  padding: 30px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow-x: auto; /* Allows horizontal scrolling if absolutely needed */
+  white-space: nowrap; /* Prevents wrapping */
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .countdown-container {
-  max-width: 600px;
+  display: inline-block; /* Makes container shrink-to-fit */
+  min-width: min(100%, 600px);
   margin: 0 auto;
+  padding: 0 clamp(10px, 3vw, 20px);
 }
 
 .countdown-title {
   font-family: var(--font-heading);
-  font-size: 1.8rem;
-  margin-bottom: 30px;
+  font-size: clamp(1.4rem, 4vw, 1.8rem);
+  margin-bottom: clamp(15px, 3vw, 30px);
   color: var(--text-color);
+  white-space: normal; /* Allows title text to wrap */
 }
 
-/* Countdown Items Layout */
+/* ===== Single Line Countdown Layout ===== */
 .countdown {
-  display: flex;
+  display: inline-flex; /* Prevents wrapping */
+  flex-wrap: nowrap;
+  gap: clamp(8px, 2vw, 20px);
   justify-content: center;
-  gap: 20px;
+  padding: 0 10px;
 }
 
 .countdown-item {
   background-color: var(--primary-color);
-  padding: 15px 25px;
-  border-radius: 8px;
-  min-width: 90px;
+  padding: clamp(8px, 1.5vw, 15px) clamp(12px, 2vw, 20px);
+  border-radius: clamp(6px, 1vw, 8px);
+  min-width: max-content; /* Prevents squishing */
   box-shadow: 0 4px 15px rgba(162, 128, 232, 0.2);
   transition: transform 0.3s ease;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .countdown-item:hover {
   transform: translateY(-5px);
 }
 
-/* Countdown Numbers and Labels */
+/* ===== Countdown Numbers ===== */
 .countdown-item span {
   font-family: var(--font-heading);
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 5vw, 2.3rem); /* Slightly smaller to fit */
   font-weight: 600;
-  display: block;
   color: var(--accent-color);
+  line-height: 1;
 }
 
 .countdown-label {
-  font-size: 0.9rem;
+  font-size: clamp(0.6rem, 2vw, 0.8rem); /* Smaller label */
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-top: 5px;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+/* ===== Mobile Horizontal Scroll Fallback ===== */
+@media (max-width: 500px) {
+  .countdown {
+    justify-content: flex-start; /* Allows horizontal scrolling */
+    padding-bottom: 10px; /* Space for scrollbar */
+  }
+
+  .countdown-item {
+    min-width: 70px; /* Fixed minimum size */
+  }
+
+  .countdown-item span {
+    font-size: 1.7rem; /* Fixed size for small screens */
+  }
 }
 
 /* ============================================================
