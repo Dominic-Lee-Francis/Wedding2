@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Calculate random movement (pre-calculated pixels)
       const angle = Math.random() * Math.PI * 2; // Random direction
-      const distance = 200 + Math.random() * 150; // 200-350px
+      const distance = 200 + Math.random() * 350; // 200-350px
       const moveX = Math.cos(angle) * distance;
       const moveY = Math.sin(angle) * distance;
 
@@ -384,7 +384,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const distance = 100 + Math.random() * 150; // 100-250px
     const moveX = Math.cos(randomAngle) * distance;
     const moveY = Math.sin(randomAngle) * distance;
-    const rotation = Math.random() * 180 - 90; // -90 to +90 degrees
+    const rotation = Math.random() * 360 - 90; // -90 to +90 degrees
 
     wonwon.style.setProperty("--move-x", `${moveX}px`);
     wonwon.style.setProperty("--move-y", `${moveY}px`);
