@@ -30,9 +30,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ===================== 2. Image Gallery with Auto-Cycle =====================
   // --- Gallery setup ---
-  const imageCount = 42;
+  const imageCount = 62;
   let currentImageIndex = 0;
   let autoSlideInterval;
+  let resetTimeout;
   const imageElement = document.getElementById("current-image");
 
   // --- Preload and shuffle images ---
@@ -78,10 +79,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // --- Start and pause auto-cycling ---
   function startAutoSlide() {
+    clearInterval(autoSlideInterval);
     autoSlideInterval = setInterval(nextImage, 4000);
   }
   function pauseAutoSlide() {
     clearInterval(autoSlideInterval);
+  }
+
+  // --- Pause for 20s after navigation, then reset gallery ---
+  function pauseAndResetGallery() {
+    pauseAutoSlide();
+    clearTimeout(resetTimeout);
+    resetTimeout = setTimeout(() => {
+      // Reset: shuffle, go to first image, and restart auto-slide
+      shuffleArray(images);
+      loadImage(0);
+      startAutoSlide();
+    }, 20000);
   }
 
   // --- Initialize gallery and UX events ---
