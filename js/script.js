@@ -414,14 +414,23 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener(
     "touchstart",
     function (e) {
-      e.preventDefault();
+      // Only prevent default if the target is a button or interactive element
+      // (to avoid blocking scrolling on the whole page)
+      // if (
+      //   e.target.tagName === "BUTTON" ||
+      //   e.target.tagName === "A" ||
+      //   e.target.closest("button") ||
+      //   e.target.closest("a")
+      // ) {
+      //   e.preventDefault();
+      // }
       for (let i = 0; i < e.touches.length; i++) {
         const touch = e.touches[i];
         // Create more wonwons here for each touch
         createWonwonAtPosition(touch.clientX, touch.clientY);
       }
     },
-    { passive: false }
+    { passive: true }
   );
 
   // --- Also work with mouse clicks for hybrid devices ---
