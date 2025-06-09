@@ -274,6 +274,7 @@ body {
 } */
 
 .section-title {
+  padding: 40px 0;
   font-family: var(--font-heading);
   font-size: 2rem;
   text-align: center;

@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ===================== 2. Image Gallery with Auto-Cycle =====================
   // --- Gallery setup ---
-  const imageCount = 62;
+  const imageCount = 61; // Total number of images
   let currentImageIndex = 0;
   let autoSlideInterval;
   let resetTimeout;
