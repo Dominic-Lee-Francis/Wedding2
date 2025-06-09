@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   // ===================== 1. Countdown Timer =====================
   // --- Setup wedding date ---
-  const weddingDate = new Date("November 22, 2025 13:00:00").getTime();
+  const weddingDate = new Date("November 22, 2025 12:00:00").getTime();
 
   // --- Update countdown display ---
   function updateCountdown() {
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ===================== 2. Image Gallery with Auto-Cycle =====================
   // --- Gallery setup ---
-  const imageCount = 61; // Total number of images
+  const imageCount = 60; // Total number of images
   let currentImageIndex = 0;
   let autoSlideInterval;
   let resetTimeout;
