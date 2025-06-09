@@ -275,11 +275,12 @@ document.addEventListener("DOMContentLoaded", function () {
       "BEGIN:VCALENDAR",
       "VERSION:2.0",
       "BEGIN:VEVENT",
-      "SUMMARY:Dom & Genie's Wedding",
-      "DTSTART:20251122T150000",
-      "DTEND:20251123T140000",
-      `LOCATION:[Insert Venue Address]`,
-      `DESCRIPTION:For details, visit: ${window.location.href}`,
+      "SUMMARY:Dominic & Genie's Wedding",
+      "DTSTART:20251122T120000",
+      "DTEND:20251123T160000",
+      `LOCATION: Hong Kong Cricket Club, Wong Nai Chung Gap Road, Happy Valley, Hong Kong`,
+      "DESCRIPTION:Join us for our wedding celebration!",
+      "URL:https://www.dominicandgenie.lol",
       "END:VEVENT",
       "END:VCALENDAR",
     ].join("\n");
@@ -334,8 +335,8 @@ document.addEventListener("DOMContentLoaded", function () {
   style.textContent = `
     .floating-wonwon {
         position: fixed;
-        width: 25px;
-        height: 25px;
+        width: 30px;
+        height: 30px;
         pointer-events: none;
         z-index: 1000;
         transform: translate(-50%, -50%);
@@ -459,21 +460,17 @@ document.addEventListener("DOMContentLoaded", function () {
     wonwon.src = "images/wonwon.png";
     wonwon.className = "floating-wonwon";
 
-    // Position at current mouse location
     const startX = mouseX;
     const startY = mouseY;
     wonwon.style.left = `${startX}px`;
     wonwon.style.top = `${startY}px`;
 
-    // Calculate random outward direction (always away from cursor)
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
 
-    // Vector from center to cursor (ensures outward movement)
     const toCursorX = mouseX - centerX;
     const toCursorY = mouseY - centerY;
 
-    // Random angle within 90-degree cone away from center
     const baseAngle = Math.atan2(toCursorY, toCursorX);
     const randomAngle = baseAngle + ((Math.random() - 0.5) * Math.PI) / 2;
 
@@ -491,7 +488,6 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => wonwon.remove(), 2000);
   }
 
-  // Add CSS
   const style = document.createElement("style");
   style.textContent = `
     .floating-wonwon {
@@ -535,10 +531,8 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
   document.head.appendChild(style);
 
-  // Start interval (every 10 seconds)
   setInterval(createFloatingWonwon, 10000);
 
-  // Initial spawn
   setTimeout(createFloatingWonwon, 100);
 });
 */
