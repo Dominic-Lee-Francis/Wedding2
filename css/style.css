@@ -274,7 +274,7 @@ body {
 } */
 
 .section-title {
-  padding: 40px 0;
+  padding: 20px 0;
   font-family: var(--font-heading);
   font-size: 2rem;
   text-align: center;
@@ -369,10 +369,26 @@ body {
 }
 
 /* ============================================================
+  RSVP Section
+  ============================================================ */
+.rsvp-section {
+  padding: 20px 0;
+  text-align: center;
+}
+
+.rsvp-text {
+  font-family: var(--font-heading);
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  color: var(--text-color);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ============================================================
   Save the Date Section & Button
   ============================================================ */
 .save-date-section {
-  padding: 40px 0;
+  padding: 20px 0;
   text-align: center;
   position: relative;
   z-index: 1;
