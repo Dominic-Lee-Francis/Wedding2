@@ -371,6 +371,40 @@ document.addEventListener("DOMContentLoaded", function () {
         70% { opacity: 1; }
         100% { opacity: 0; }
     }
+
+    .floating-wonwon-big {
+        position: fixed;
+        width: 600px;
+        height: 600px;
+        pointer-events: none;
+        z-index: 1000;
+        transform: translate(-50%, -50%);
+        animation: 
+            floatWonwonBig 2s ease-out forwards,
+            spinWonwonBig 2s linear forwards,
+            fadeWonwon 2s ease-out forwards;
+    }
+
+    @keyframes floatWonwonBig {
+        to {
+            transform: 
+                translate(
+                    calc(-50% + var(--move-x)), 
+                    calc(-50% + var(--move-y))
+                );
+        }
+    }
+
+    @keyframes spinWonwonBig {
+        to {
+            transform: 
+                translate(
+                    calc(-50% + var(--move-x)), 
+                    calc(-50% + var(--move-y))
+                )
+                rotate(var(--rotation));
+        }
+    }
     `;
   document.head.appendChild(style);
 
@@ -411,23 +445,49 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => wonwon.remove(), 2000);
   }
 
+  // --- Create BIG wonwon at a given position ---
+  function createBigWonwonAtPosition(x, y) {
+    const wonwon = new Image();
+    wonwon.src = "images/wonwon.png";
+    wonwon.className = "floating-wonwon-big";
+
+    // Position at touch/click location
+    wonwon.style.left = `${x}px`;
+    wonwon.style.top = `${y}px`;
+
+    // Calculate center of screen
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+
+    // Vector from center to touch/click point
+    const toTouchX = x - centerX;
+    const toTouchY = y - centerY;
+
+    // Random angle in full 360-degree circle away from center
+    const baseAngle = Math.atan2(toTouchY, toTouchX);
+    const randomAngle = baseAngle + (Math.random() - 0.5) * Math.PI * 2;
+
+    const distance = 100 + Math.random() * 150; // 100-250px
+    const moveX = Math.cos(randomAngle) * distance;
+    const moveY = Math.sin(randomAngle) * distance;
+    const rotation = Math.random() * 360 - 90; // -90 to +90 degrees
+
+    wonwon.style.setProperty("--move-x", `${moveX}px`);
+    wonwon.style.setProperty("--move-y", `${moveY}px`);
+    wonwon.style.setProperty("--rotation", `${rotation}deg`);
+
+    document.body.appendChild(wonwon);
+
+    // Remove after animation completes
+    setTimeout(() => wonwon.remove(), 2000);
+  }
+
   // --- Handle touch events (multi-touch supported) ---
   document.addEventListener(
     "touchstart",
     function (e) {
-      // Only prevent default if the target is a button or interactive element
-      // (to avoid blocking scrolling on the whole page)
-      // if (
-      //   e.target.tagName === "BUTTON" ||
-      //   e.target.tagName === "A" ||
-      //   e.target.closest("button") ||
-      //   e.target.closest("a")
-      // ) {
-      //   e.preventDefault();
-      // }
       for (let i = 0; i < e.touches.length; i++) {
         const touch = e.touches[i];
-        // Create more wonwons here for each touch
         createWonwonAtPosition(touch.clientX, touch.clientY);
       }
     },
@@ -436,103 +496,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // --- Also work with mouse clicks for hybrid devices ---
   document.addEventListener("click", function (e) {
-    // Create more wonwons here for each click
     createWonwonAtPosition(e.clientX, e.clientY);
   });
-});
 
-/*
-===========================================================================
-  (Commented Out) Floating wonwon on mouse cursor every 10 seconds
-===========================================================================
+  // --- Handle touch events BIG Version(multi-touch supported) ---
+  document.addEventListener(
+    "touchstart",
+    function (e) {
+      if (Math.random() < 0.01) {
+        for (let i = 0; i < e.touches.length; i++) {
+          const touch = e.touches[i];
+          for (let j = 0; j < 3; j++) {
+            createBigWonwonAtPosition(touch.clientX, touch.clientY);
+          }
+        }
+      }
+    },
+    { passive: true }
+  );
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Track mouse position
-  let mouseX = 0;
-  let mouseY = 0;
-  document.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+  // --- Also work with mouse clicks for hybrid devices ---
+  document.addEventListener("click", function (e) {
+    if (Math.random() < 0.01) {
+      for (let j = 0; j < 3; j++) {
+        createBigWonwonAtPosition(e.clientX, e.clientY);
+      }
+    }
   });
-
-  function createFloatingWonwon() {
-    const wonwon = new Image();
-    wonwon.src = "images/wonwon.png";
-    wonwon.className = "floating-wonwon";
-
-    const startX = mouseX;
-    const startY = mouseY;
-    wonwon.style.left = `${startX}px`;
-    wonwon.style.top = `${startY}px`;
-
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
-
-    const toCursorX = mouseX - centerX;
-    const toCursorY = mouseY - centerY;
-
-    const baseAngle = Math.atan2(toCursorY, toCursorX);
-    const randomAngle = baseAngle + ((Math.random() - 0.5) * Math.PI) / 2;
-
-    const distance = 100 + Math.random() * 150; // 100-250px
-    const moveX = Math.cos(randomAngle) * distance;
-    const moveY = Math.sin(randomAngle) * distance;
-    const rotation = Math.random() * 180 - 90; // -90 to +90 degrees
-
-    wonwon.style.setProperty("--move-x", `${moveX}px`);
-    wonwon.style.setProperty("--move-y", `${moveY}px`);
-    wonwon.style.setProperty("--rotation", `${rotation}deg`);
-
-    document.body.appendChild(wonwon);
-
-    setTimeout(() => wonwon.remove(), 2000);
-  }
-
-  const style = document.createElement("style");
-  style.textContent = `
-    .floating-wonwon {
-        position: fixed;
-        width: 30px;
-        height: 30px;
-        pointer-events: none;
-        z-index: 1000;
-        transform: translate(-50%, -50%);
-        animation:
-            floatWonwon 2s ease-out forwards,
-            spinWonwon 2s linear forwards,
-            fadeWonwon 2s ease-out forwards;
-    }
-
-    @keyframes floatWonwon {
-        to {
-            transform:
-                translate(
-                    calc(-50% + var(--move-x)),
-                    calc(-50% + var(--move-y))
-                );
-        }
-    }
-
-    @keyframes spinWonwon {
-        to {
-            transform:
-                translate(
-                    calc(-50% + var(--move-x)),
-                    calc(-50% + var(--move-y))
-                )
-                rotate(var(--rotation));
-        }
-    }
-
-    @keyframes fadeWonwon {
-        70% { opacity: 1; }
-        100% { opacity: 0; }
-    }
-    `;
-  document.head.appendChild(style);
-
-  setInterval(createFloatingWonwon, 10000);
-
-  setTimeout(createFloatingWonwon, 100);
 });
-*/
