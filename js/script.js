@@ -335,8 +335,8 @@ document.addEventListener("DOMContentLoaded", function () {
   style.textContent = `
     .floating-wonwon {
         position: fixed;
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
         pointer-events: none;
         z-index: 1000;
         transform: translate(-50%, -50%);
