@@ -335,8 +335,8 @@ document.addEventListener("DOMContentLoaded", function () {
   style.textContent = `
     .floating-wonwon {
         position: fixed;
-        width: 30px;
-        height: 30px;
+        width: 20px;
+        height: 20px;
         pointer-events: none;
         z-index: 1000;
         transform: translate(-50%, -50%);
@@ -503,7 +503,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener(
     "touchstart",
     function (e) {
-      if (Math.random() < 0.01) {
+      if (Math.random() < 0.005) {
         for (let i = 0; i < e.touches.length; i++) {
           const touch = e.touches[i];
           for (let j = 0; j < 3; j++) {
